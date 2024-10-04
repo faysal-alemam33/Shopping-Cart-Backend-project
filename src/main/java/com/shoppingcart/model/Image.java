@@ -19,7 +19,7 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fileName;
-    private String fileType;
+    private String fileType;     // extension of file like: .png .jpeg
 
     @Lob                        // indicate that a persistent property should be stored as a large object (LOB) in the databas, tells the JPA provider to treat this field as a large object.
     private Blob image;         // Blob(Binary Large Objects): data type used to store binary large objects
