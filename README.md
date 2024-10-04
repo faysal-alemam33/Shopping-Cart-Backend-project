@@ -1,2 +1,19 @@
-# Shopping-Cart-Backend-project
-A shopping cart backend project built with Spring Boot and Spring Security to master backend development. It includes CRUD operations for products and categories, cart management, and secure authentication. Key features include entity mapping, service/controller layers, and API security.
+# Shopping Cart Backend Project
+
+This project is built using **Spring Boot** and **Spring Security** to develop a fully functional shopping cart backend. The purpose is to master the core concepts of these frameworks through practical implementation.
+
+## Key Features
+
+- **Entity Classes & Relationships**: Products, Categories, and Carts with proper mapping and relationships.
+- **CRUD Operations**: Implement create, read, update, and delete functionalities for Products and Categories.
+- **Service & Controller Layer**: Separate services for business logic and controllers for API endpoints.
+- **Cart Management**: Manage product additions and removals in the shopping cart.
+- **Spring Security**: Implement authentication and authorization to secure the API.
+
+## Technologies Used
+
+- **Spring Boot** for backend development
+- **Spring Security** for secure authentication and authorization
+- **JPA/Hibernate** for database interaction
+- **MySQL/PostgreSQL** as the relational database
+
