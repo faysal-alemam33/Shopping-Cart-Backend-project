@@ -1,5 +1,6 @@
 package com.shoppingcart.service.product;
 
+import com.shoppingcart.dto.ProductDto;
 import com.shoppingcart.exceptions.ProductNotFoundException;
 import com.shoppingcart.model.Category;
 import com.shoppingcart.model.Product;
@@ -82,12 +83,12 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public List<Product> getProductsByCategoryName(String categoryName) {
+    public List<Product> getProductsByCategory(String categoryName) {
         return productRepository.findByCategoryName(categoryName);
     }
 
     @Override
-    public List<Product> getProductsByCBrand(String brand) {
+    public List<Product> getProductsByBrand(String brand) {
         return productRepository.findByBrand(brand);
     }
 
@@ -97,7 +98,7 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public List<Product> getProductByName(String name) {
+    public List<Product> getProductsByName(String name) {
         return productRepository.findByCategoryName(name);
     }
 
@@ -115,5 +116,15 @@ public class ProductService implements IProductService{
     @Override
     public Long countProductsByBrandAndName(String brand, String name) {
         return productRepository.countByBrandAndName(brand, name);
+    }
+
+    @Override
+    public List<ProductDto> getConvertedProducts(List<Product> products) {
+        return null;
+    }
+
+    @Override
+    public ProductDto convertToDto(Product product) {
+        return null;
     }
 }
