@@ -13,14 +13,12 @@ import java.util.List;
 
 @Data
 public class AddProductRequest {
-
     private Long id;
     private String name;
     private String brand;
-    private BigDecimal price;           // its more precision in mathematics operations
-    private int inventory;          // number of products remaining in the stock after user has ordered
+    private BigDecimal price;
+    private int inventory;
     private String description;
     private Category category;
-    private List<Image> images;         // Image
 
 }

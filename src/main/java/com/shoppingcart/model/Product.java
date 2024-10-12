@@ -1,5 +1,6 @@
 package com.shoppingcart.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,12 +27,13 @@ public class Product {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
+    @JsonBackReference          // Avoids circular reference
     private Category category;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true) //mappedBy:map the name of product field in Image class
     private List<Image> images;         // Image
 
 
-    public Product(String name, String brand, String description, BigDecimal price, int inventory, Category category) {
+    public Product(String name, String brand, BigDecimal description, int price, String inventory, Category category) {
     }
 }

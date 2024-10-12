@@ -1,5 +1,6 @@
 package com.shoppingcart.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.shoppingcart.model.Product;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category")
+    @JsonBackReference
     private List<Product> products;
 
     public Category(String name) {

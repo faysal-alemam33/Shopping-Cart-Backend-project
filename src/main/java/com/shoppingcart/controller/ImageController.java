@@ -5,10 +5,10 @@ import com.shoppingcart.exceptions.ResourceNotFoundException;
 import com.shoppingcart.model.Image;
 import com.shoppingcart.response.ApiResponse;
 import com.shoppingcart.service.image.IImageService;
-import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,12 +39,27 @@ public class ImageController {
     }
 
     @GetMapping("/image/download/{imageId}")
-    public ResponseEntity<Resource> downloadImage(@PathVariable Long imageId) throws SQLException {
-        Image image = imageService.getImageById(imageId);
-        ByteArrayResource resource = new ByteArrayResource(image.getImage().getBytes(1, (int) image.getImage().length()));
-        return  ResponseEntity.ok().contentType(MediaType.parseMediaType(image.getFileType()))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" +image.getFileName() + "\"")
-                .body((Resource) resource);
+    public ResponseEntity<ByteArrayResource> downloadImage(@PathVariable Long imageId) {
+        try {
+            // Fetch image from service
+            Image image = imageService.getImageById(imageId);
+
+            // Convert the Blob to a byte array [,,,,,,,]
+            byte[] imageBytes = image.getImage().getBytes(1, (int) image.getImage().length());
+
+            // Create ByteArrayResource from byte array
+            ByteArrayResource resource = new ByteArrayResource(imageBytes);
+
+            // Return the file as a download response
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType(image.getFileType()))
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + image.getFileName() + "\"")
+                    .body(resource);
+        } catch (SQLException e) {
+            // Handle exception if there is an issue with SQL/Blob retrieval
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);  // You can return a specific error message or object here
+        }
     }
 
     @PutMapping("/image/{imageId}/update")

@@ -41,7 +41,7 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/add")
+    @PostMapping("/add")
     public ResponseEntity<ApiResponse> addProduct(@RequestBody AddProductRequest product) {
         try {
             Product theProduct = productService.addProduct(product);
